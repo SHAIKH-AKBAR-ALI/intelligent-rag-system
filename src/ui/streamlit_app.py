@@ -13,18 +13,14 @@ import streamlit as st
 import time
 from datetime import datetime
 
-try:
-    from src.core.config import settings
-    from src.text.chunker import chunk_text_smart
-    from src.ui.loaders.file_loader import extract_text_from_upload, extract_text_from_url
-    from src.llm_providers.openai_embed import OpenAIEmbeddings
-    from src.llm_providers.openai_llm import OpenAILLM
-    from src.vectorstore.faiss_store import FaissStore
-    from src.agents.agent_builder import Agent
-except ImportError as e:
-    st.error(f"Import error: {e}")
-    st.error("Please check if all required files are present in the repository.")
-    st.stop()
+# Direct imports (assuming src is in Python path)
+from core.config import settings
+from text.chunker import chunk_text_smart
+from ui.loaders.file_loader import extract_text_from_upload, extract_text_from_url
+from llm_providers.openai_embed import OpenAIEmbeddings
+from llm_providers.openai_llm import OpenAILLM
+from vectorstore.faiss_store import FaissStore
+from agents.agent_builder import Agent
 
 def _init_session():
     if "embedder" not in st.session_state:

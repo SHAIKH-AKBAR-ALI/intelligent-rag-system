@@ -8,7 +8,7 @@ try:
 except ImportError:
     st = None
 try:
-    from src.core.config import settings
+    from core.config import settings
 except ImportError:
     settings = None
 

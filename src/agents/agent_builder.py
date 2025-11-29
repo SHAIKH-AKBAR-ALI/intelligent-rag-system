@@ -2,10 +2,10 @@
 # - Orchestrates embed -> retrieve -> prompt -> LLM.
 
 from typing import Optional, Any, Dict
-from src.llm_providers.openai_embed import OpenAIEmbeddings
-from src.llm_providers.openai_llm import OpenAILLM
-from src.vectorstore.faiss_store import FaissStore
-from src.prompts.templates import build_rag_prompt
+from llm_providers.openai_embed import OpenAIEmbeddings
+from llm_providers.openai_llm import OpenAILLM
+from vectorstore.faiss_store import FaissStore
+from prompts.templates import build_rag_prompt
 
 class Agent:
     def __init__(self, embedder: Optional[Any]=None, llm: Optional[OpenAILLM]=None, store: Optional[FaissStore]=None, top_k: int=4):
