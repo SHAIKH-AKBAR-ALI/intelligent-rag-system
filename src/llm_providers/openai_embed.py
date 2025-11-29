@@ -41,4 +41,4 @@ class OpenAIEmbeddings:
             )
             return [embedding.embedding for embedding in response.data]
         except Exception as e:
-            raise RuntimeError(f"OpenAI embedding error: {str(e).encode('ascii', 'ignore').decode('ascii')}"
+            raise RuntimeError(f"OpenAI embedding error: {str(e).encode('ascii', 'ignore').decode('ascii')}")
