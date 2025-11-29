@@ -1,22 +1,30 @@
 # WHAT THIS MODULE DOES:
 # - Streamlit UI for ingestion + chat.
 
-import sys, os
-project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-if project_root not in sys.path:
-    sys.path.insert(0, project_root)
+import sys
+import os
+from pathlib import Path
+
+# Add project root to Python path
+project_root = Path(__file__).parent.parent.parent
+sys.path.insert(0, str(project_root))
 
 import streamlit as st
-from pathlib import Path
 import time
 from datetime import datetime
-from src.core.config import settings
-from src.text.chunker import chunk_text_smart
-from src.ui.loaders.file_loader import extract_text_from_upload, extract_text_from_url
-from src.llm_providers.openai_embed import OpenAIEmbeddings
-from src.llm_providers.openai_llm import OpenAILLM
-from src.vectorstore.faiss_store import FaissStore
-from src.agents.agent_builder import Agent
+
+try:
+    from src.core.config import settings
+    from src.text.chunker import chunk_text_smart
+    from src.ui.loaders.file_loader import extract_text_from_upload, extract_text_from_url
+    from src.llm_providers.openai_embed import OpenAIEmbeddings
+    from src.llm_providers.openai_llm import OpenAILLM
+    from src.vectorstore.faiss_store import FaissStore
+    from src.agents.agent_builder import Agent
+except ImportError as e:
+    st.error(f"Import error: {e}")
+    st.error("Please check if all required files are present in the repository.")
+    st.stop()
 
 def _init_session():
     if "embedder" not in st.session_state:
